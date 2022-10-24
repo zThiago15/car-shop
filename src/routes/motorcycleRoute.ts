@@ -12,6 +12,7 @@ const motorcycleController = new MotorcycleController(motorcycleService);
 
 const motorcycleMiddleware = new MotorcycleMiddleware();
 
+const routeMotorcycleId = '/motorcycles/:id';
 route.post(
   '/motorcycles',
   (req, res, next) => motorcycleMiddleware.validateData(req, res, next),
@@ -19,20 +20,20 @@ route.post(
 );
 
 route.get(
-  '/motorcycles/:id',
+  routeMotorcycleId,
   (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
   (req, res) => motorcycleController.readOne(req, res),
 );
 
 route.get('/motorcycles', (req, res) => motorcycleController.read(req, res));
 route.put(
-  '/motorcycles/:id',
+  routeMotorcycleId,
   (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
   (req, res, next) => motorcycleMiddleware.verifyBody(req, res, next),
   (req, res) => motorcycleController.update(req, res),
 );
 route.delete(
-  '/motorcycles/:id',
+  routeMotorcycleId,
   (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
   (req, res) => motorcycleController.delete(req, res),
 );

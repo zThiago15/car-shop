@@ -1,22 +1,26 @@
-// template para criação dos testes de cobertura da camada de controller
+import * as sinon from 'sinon';
+import chai from 'chai';
+import MongoModel from '../../../models/MongoModel';
+import { ICar } from '../../../interfaces/ICar';
+import CarModel from '../../../models/CarModel';
+import { Model } from 'mongoose';
+import { carMockWithId, carMock } from '../../mocks/carMock';
+const { expect } = chai;
 
+describe('Car model', () => {
+  const carModel = new CarModel();
 
-// import * as sinon from 'sinon';
-// import chai from 'chai';
-// const { expect } = chai;
+  before(async () => {
+    sinon.stub(Model, 'create').resolves(carMockWithId);
+  });
 
-// describe('Sua descrição', () => {
+  after(()=>{
+    sinon.restore();
+  })
 
-//   before(async () => {
-//     sinon
-//       .stub()
-//       .resolves();
-//   });
+  it('creating a car', async () => {
+    const newCar = await carModel.create(carMock);
+    expect(newCar).to.be.deep.equal(carMockWithId);
+  });
 
-//   after(()=>{
-//     sinon.restore();
-//   })
-
-//   it('', async () => {});
-
-// });
+});

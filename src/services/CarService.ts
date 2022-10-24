@@ -1,5 +1,4 @@
-import ErrorTypes from '../errors/carCatalog';
-import { carZodSchema, ICar } from '../interfaces/ICar';
+import { ICar } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
 import IService from '../interfaces/IService';
 

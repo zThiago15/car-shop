@@ -15,11 +15,7 @@ export default class CarService implements IService<ICar> {
   }
 
   async readOne(_id: string): Promise<ICar | null> {
-    const car = await this._car.readOne(_id);
-    if (!car) {
-      throw Error(ErrorTypes.carNotFound);
-    }
-    return car;
+    return this._car.readOne(_id);
   }
 
   async read(): Promise<ICar[]> {
@@ -27,19 +23,10 @@ export default class CarService implements IService<ICar> {
   }
 
   async update(_id: string, obj: ICar): Promise<ICar | null> {
-    const parsed = carZodSchema.safeParse(obj);
-    if (!parsed.success) throw parsed.error; 
-
-    const carExists = await this._car.readOne(_id);
-    if (!carExists) throw Error(ErrorTypes.carNotFound);
-
     return this._car.update(_id, obj);
   }
 
   async delete(_id: string): Promise<ICar | null> {
-    const carExists = await this._car.readOne(_id);
-    if (!carExists) throw Error(ErrorTypes.carNotFound);
-
     return this._car.delete(_id);
   }
 }

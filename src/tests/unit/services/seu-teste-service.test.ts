@@ -1,22 +1,26 @@
-// template para criação dos testes de cobertura da camada de service
+import * as sinon from 'sinon';
+import chai from 'chai';
+import CarService from '../../../services/CarService';
+import CarModel from '../../../models/CarModel';
+import { carMock, carMockWithId } from '../../mocks/carMock';
+const { expect } = chai;
 
+describe('Sua descrição', () => {
 
-// import * as sinon from 'sinon';
-// import chai from 'chai';
-// const { expect } = chai;
+  const carModel = new CarModel();
+  const  carService = new CarService(carModel);
 
-// describe('Sua descrição', () => {
+  before(async () => {
+    sinon.stub(carModel, 'create').resolves(carMockWithId);
+  });
 
-//   before(async () => {
-//     sinon
-//       .stub()
-//       .resolves();
-//   });
+  after(()=>{
+    sinon.restore();
+  })
 
-//   after(()=>{
-//     sinon.restore();
-//   })
+  it('create a car', async () => {
+    const carCreated = await carService.create(carMock);
+    expect(carCreated).to.be.deep.equal(carMockWithId);
+  });
 
-//   it('', async () => {});
-
-// });
+});

@@ -1,14 +1,16 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, request, Request, Response } from 'express';
 import { carZodSchema } from '../interfaces/ICar';
 import CarModel from '../models/CarModel';
 
 export default class CarMiddleware {
   private carSchema;
   private carModel;
+  private reqBody;
 
   constructor() {
     this.carSchema = carZodSchema;
     this.carModel = new CarModel();
+    this.reqBody = request;
   }
 
   validateData(req: Request, res: Response, next: NextFunction) {
@@ -33,6 +35,13 @@ export default class CarMiddleware {
       return res.status(404).json({ error: 'Object not found' });
     }
 
+    next();
+  }
+
+  async verifyBody(_req: Request, res: Response, next: NextFunction) {
+    if (!this.reqBody.body) {
+      return res.status(400).end();
+    }
     next();
   }
 }

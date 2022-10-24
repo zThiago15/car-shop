@@ -24,4 +24,18 @@ export default class CarController {
     const allCars = await this._service.read();
     return res.status(200).json(allCars);
   }
+
+  async update(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const updatedCar = await this._service.update(id, req.body);
+    return res.status(200).json(updatedCar);
+  }
+
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+
+    await this._service.delete(id);
+    return res.status(204).end();
+  }
 }

@@ -25,4 +25,18 @@ route.get(
 
 route.get('/cars', (req, res) => carController.read(req, res));
 
+route.put(
+  '/cars/:id', 
+  (req, res, next) => carMiddleware.validateData(req, res, next),
+  (req, res, next) => carMiddleware.validateId(req, res, next),
+  // (req, res, next) => carMiddleware.verifyBody(req, res, next),
+  (req, res) => carController.update(req, res),
+);
+
+route.delete(
+  '/cars/:id',
+  (req, res, next) => carMiddleware.validateId(req, res, next),
+  (req, res) => carController.delete(req, res),
+);
+
 export default route;

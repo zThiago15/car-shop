@@ -17,5 +17,9 @@ route.post(
   (req, res, next) => motorcycleMiddleware.validateData(req, res, next),
   (req, res) => motorcycleController.create(req, res),
 );
+route.get(
+  '/motorcycles',
+  (req, res) => motorcycleController.read(req, res),
+);
 
 export default route;

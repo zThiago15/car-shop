@@ -13,4 +13,10 @@ export default class CarController {
     const carCreted = await this._service.create(req.body);
     return res.status(201).json(carCreted);
   }
+
+  async readOne(req: Request, res: Response) {
+    const { id } = req.params;
+    const carFound = await this._service.readOne(id);
+    return res.status(200).json(carFound);
+  }
 }

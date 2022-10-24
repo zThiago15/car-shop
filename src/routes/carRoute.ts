@@ -17,4 +17,10 @@ route.post(
   (req, res) => carController.create(req, res),
 );
 
+route.get(
+  '/cars/:id', 
+  (req, res, next) => carMiddleware.validateId(req, res, next),
+  (req, res) => carController.readOne(req, res),
+);
+
 export default route;

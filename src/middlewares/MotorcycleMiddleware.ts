@@ -23,9 +23,6 @@ export default class MotorcycleMiddleware {
 
   async validateId(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    if (!req.body) {
-      return res.status(400).end();
-    }
 
     if (!id || id.length < 24) {
       return res.status(400).json({ error: 'Id must have 24 hexadecimal characters' });

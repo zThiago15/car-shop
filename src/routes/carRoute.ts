@@ -23,4 +23,6 @@ route.get(
   (req, res) => carController.readOne(req, res),
 );
 
+route.get('/cars', (req, res) => carController.read(req, res));
+
 export default route;

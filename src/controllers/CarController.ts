@@ -19,4 +19,9 @@ export default class CarController {
     const carFound = await this._service.readOne(id);
     return res.status(200).json(carFound);
   }
+
+  async read(req: Request, res: Response) {
+    const allCars = await this._service.read();
+    return res.status(200).json(allCars);
+  }
 }

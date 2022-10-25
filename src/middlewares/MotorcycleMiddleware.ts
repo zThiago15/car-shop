@@ -39,10 +39,6 @@ export default class MotorcycleMiddleware {
   async validationToUpdate(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
 
-    if (!req.body) {
-      return res.status(400).end();
-    }
-
     if (!id || id.length < 24) {
       return res.status(400).json({ error: 'Id must have 24 hexadecimal characters' });
     }
@@ -51,6 +47,11 @@ export default class MotorcycleMiddleware {
     if (!motorcycleFound) {
       return res.status(404).json({ error: 'Object not found' });
     }
+
+    if (!req.body.category) {
+      return res.status(400).end();
+    }
+
     next();
   }
 }

@@ -28,10 +28,10 @@ route.get(
 route.get('/motorcycles', (req, res) => motorcycleController.read(req, res));
 route.put(
   routeMotorcycleId,
-  (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
-  (req, res, next) => motorcycleMiddleware.verifyBody(req, res, next),
+  (req, res, next) => motorcycleMiddleware.validationToUpdate(req, res, next),
   (req, res) => motorcycleController.update(req, res),
 );
+
 route.delete(
   routeMotorcycleId,
   (req, res, next) => motorcycleMiddleware.validateId(req, res, next),

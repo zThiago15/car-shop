@@ -29,7 +29,6 @@ route.put(
   '/cars/:id', 
   (req, res, next) => carMiddleware.validateData(req, res, next),
   (req, res, next) => carMiddleware.validateId(req, res, next),
-  // (req, res, next) => carMiddleware.verifyBody(req, res, next),
   (req, res) => carController.update(req, res),
 );
 
